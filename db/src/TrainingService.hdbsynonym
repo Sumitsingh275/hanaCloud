@@ -1,0 +1,55 @@
+{
+  "SCUSTOM": {
+    "target": {
+      "object": "SCUSTOM",
+      "schema": "SFLIGHT"
+    }
+  },
+  "STICKET": {
+    "target": {
+      "object": "STICKET",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SFLIGHT": {
+    "target": {
+      "object": "SFLIGHT",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SBOOK": {
+    "target": {
+      "object": "SBOOK",
+      "schema": "SFLIGHT"
+    }
+  },
+  "STUDENTMASTER": {
+    "target": {
+      "object": "STUDENTMASTER",
+      "schema": "SFLIGHT"
+    }
+  },
+  "STUDENTMARKS": {
+    "target": {
+      "object": "STUDENTMARKS",
+      "schema": "SFLIGHT"
+    }
+  },
+  "STUDENTCOMBINED": {
+    "target": {
+      "object": "STUDENTCOMBINED",
+      "schema": "SFLIGHT"
+    }
+  },
+  "STUDENTREPORT1": {
+    "target": {
+      "object": "STUDENTREPORT1",
+      "schema": "SFLIGHT"
+    }
+  },
+  "STUDENTREPORT": {
+    "target": {
+      "object": "STUDENTREPORT"
+    }
+  }
+}

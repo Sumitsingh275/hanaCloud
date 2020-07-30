@@ -1,0 +1,18 @@
+PROCEDURE "STUDENTREPORTVIEWTOTABLE"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   --CREATE TABLE STUDENTREPORT AS
+   SELECT * FROM STUDENTMASTER;
+   
+   --INSERT INTO "STUDENTDUMMY" VALUES(110);
+
+   --SELECT CURRENT_SCHEMA "current schema" FROM DUMMY;
+   --create column table STUDENTREPORTVIEW as (select * from STUDENTMASTER );
+   --insert into "my_new_table" values(205,'ramesh','jsafdjpur',913213123);
+END

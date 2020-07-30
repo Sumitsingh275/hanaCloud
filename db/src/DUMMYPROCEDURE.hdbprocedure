@@ -1,0 +1,16 @@
+PROCEDURE "DUMMYPROCEDURE"( )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA 
+   AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   SELECT * FROM "STUDENTREPORT1";
+   
+   
+   -- insufficient previlege error for insert from a procedure
+   INSERT INTO "STUDENTREPORT1" VALUES(171, 'Samesh', 'allahabad', 8777890989);
+END

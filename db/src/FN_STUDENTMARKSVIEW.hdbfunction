@@ -1,0 +1,22 @@
+FUNCTION "FN_STUDENTMARKSVIEW"(IN SID NUMBER )
+       RETURNS TABLE
+       (
+       		-- "COUNT" INT,
+       		"SNAME" NVARCHAR(20), "CITY" NVARCHAR(20), "TOTALMARKS" INT
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    RETURN
+    SELECT 
+    	-- COUNT(*) AS "COUNT",
+    	-- "ID",
+    	"NAME" AS "SNAME", "CITY" AS "CITY" , "TOTALMARKS" AS "TOTALMARKS"
+    	FROM
+    	"STUDENTREPORT"
+    	WHERE Standing = :SID;
+    	
+    	
+    	-- feature of insert update and delete are not available for function
+    	-- INSERT INTO "STUDENTREPORT1" VALUES(171, 'Samesh', 'allahabad', 8777890989);
+END;

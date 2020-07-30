@@ -1,0 +1,21 @@
+PROCEDURE "GETSTUDENTMASTER"(in inp varchar(20) )
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   /*************************************
+       Write your procedure logic 
+   *************************************/
+   --SELECT * FROM "STUDENTMASTER" where ID = :inp;
+   SELECT * FROM "STUDENTMASTER" where name = :inp;
+   --create table "studentdbs" as select * from "STUDENTMASTER";
+   
+END;
+
+
+-- Create procedure prc_name (in inp integer, out opt "EFASION"."ARTICLE_LOOKUP")
+-- as
+-- begin
+-- opt = select * from "EFASION"."ARTICLE_LOOKUP" where article_id = :inp ;
+-- end;

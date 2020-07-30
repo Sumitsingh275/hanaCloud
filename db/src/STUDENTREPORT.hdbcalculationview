@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="STUDENTREPORT" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="STUDENTREPORT"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="STUDENTMASTER">
+    <resourceUri>STUDENTMASTER</resourceUri>
+  </DataSource>
+  <DataSource id="STUDENTMARKS">
+    <resourceUri>STUDENTMARKS</resourceUri>
+  </DataSource>
+  <DataSource id="STUDENTCOMBINED">
+    <resourceUri>STUDENTCOMBINED</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="STUDENTID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="CONTACT_NUM" aggregationType="sum"/>
+      <viewAttribute id="ENGLISH" aggregationType="sum"/>
+      <viewAttribute id="MATHS" aggregationType="sum"/>
+      <viewAttribute id="SCIENCE" aggregationType="sum"/>
+      <viewAttribute id="COMPUTERSCIENCE" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$ID$STUDENTID"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="TOTALMARKS" datatype="DECIMAL" length="13" scale="2" expressionLanguage="SQL">
+        <formula>&quot;ENGLISH&quot;+&quot;MATHS&quot;+&quot;SCIENCE&quot;+&quot;COMPUTERSCIENCE&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT_NUM" source="CONTACT_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$STUDENTID" source="ID"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUDENTID" source="STUDENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ENGLISH" source="ENGLISH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATHS" source="MATHS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SCIENCE" source="SCIENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPUTERSCIENCE" source="COMPUTERSCIENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$STUDENTID" source="STUDENTID"/>
+    </input>
+    <joinAttribute name="JOIN$ID$STUDENTID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="CONTACT_NUM"/>
+    
+      <viewAttribute id="ID"/></viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="STUDENTMASTER"/></calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="STUDENTID"/>
+      <viewAttribute id="ENGLISH"/>
+      <viewAttribute id="MATHS"/>
+      <viewAttribute id="SCIENCE"/>
+      <viewAttribute id="COMPUTERSCIENCE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="STUDENTMARKS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:RankView" id="Rank_1">
+    <viewAttributes>
+      <viewAttribute id="STUDENTID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="CONTACT_NUM" aggregationType="sum"/>
+      <viewAttribute id="ENGLISH" aggregationType="sum"/>
+      <viewAttribute id="MATHS" aggregationType="sum"/>
+      <viewAttribute id="SCIENCE" aggregationType="sum"/>
+      <viewAttribute id="COMPUTERSCIENCE" aggregationType="sum"/>
+      <viewAttribute id="TOTALMARKS" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Union_1"/>
+    <rankingFilter type="RANK" offset="0" offsetReference="FRONT" dynamicPartitionAttributes="false">
+      <order byViewAttributeName="TOTALMARKS" direction="DESC"/>
+      <rankThreshold>
+        <value>15</value>
+      </rankThreshold>
+      <rankViewAttributeName>Standing</rankViewAttributeName>
+    </rankingFilter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="STUDENTID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="CONTACT_NUM" aggregationType="sum"/>
+      <viewAttribute id="ENGLISH" aggregationType="sum"/>
+      <viewAttribute id="MATHS" aggregationType="sum"/>
+      <viewAttribute id="SCIENCE" aggregationType="sum"/>
+      <viewAttribute id="COMPUTERSCIENCE" aggregationType="sum"/>
+      <viewAttribute id="TOTALMARKS" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUDENTID" source="STUDENTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT_NUM" source="CONTACT_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ENGLISH" source="ENGLISH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATHS" source="MATHS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SCIENCE" source="SCIENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPUTERSCIENCE" source="COMPUTERSCIENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTALMARKS" source="TOTALMARKS"/>
+    </input>
+    <input node="Projection_3" emptyUnionBehavior="NO_ROW">
+      <mapping xsi:type="Calculation:AttributeMapping" target="STUDENTID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CONTACT_NUM" source="CONTACT_NUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ENGLISH" source="ENGLISH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATHS" source="MATHS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SCIENCE" source="SCIENCE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COMPUTERSCIENCE" source="COMPUTERSCIENCE"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="TOTALMARKS" null="true" value=""/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="CONTACT_NUM"/>
+      <viewAttribute id="ENGLISH"/>
+      <viewAttribute id="MATHS"/>
+      <viewAttribute id="SCIENCE"/>
+      <viewAttribute id="COMPUTERSCIENCE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="STUDENTCOMBINED"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Rank_1">
+  <attributes>
+    <attribute id="Standing" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Rank"/>
+      <keyMapping columnObjectName="Rank_1" columnName="Standing"/>
+    </attribute>
+    <attribute id="STUDENTID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STUDENTID"/>
+      <keyMapping columnObjectName="Rank_1" columnName="STUDENTID"/>
+    </attribute>
+    <attribute id="NAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Rank_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="CITY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="Rank_1" columnName="CITY"/>
+    </attribute>
+    <attribute id="CONTACT_NUM" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CONTACT_NUM"/>
+      <keyMapping columnObjectName="Rank_1" columnName="CONTACT_NUM"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="ENGLISH" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ENGLISH"/>
+      <measureMapping columnObjectName="Rank_1" columnName="ENGLISH"/>
+    </measure>
+    <measure id="MATHS" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="MATHS"/>
+      <measureMapping columnObjectName="Rank_1" columnName="MATHS"/>
+    </measure>
+    <measure id="SCIENCE" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="SCIENCE"/>
+      <measureMapping columnObjectName="Rank_1" columnName="SCIENCE"/>
+    </measure>
+    <measure id="COMPUTERSCIENCE" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="COMPUTERSCIENCE"/>
+      <measureMapping columnObjectName="Rank_1" columnName="COMPUTERSCIENCE"/>
+    </measure>
+    <measure id="TOTALMARKS" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTALMARKS"/>
+      <measureMapping columnObjectName="Rank_1" columnName="TOTALMARKS"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="343" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="118" y="481"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="136"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="641"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="301" y="641"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Rank_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="329" y="236"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="329" y="341"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="395" y="481"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
