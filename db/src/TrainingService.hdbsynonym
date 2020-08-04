@@ -49,7 +49,8 @@
   },
   "STUDENTREPORT": {
     "target": {
-      "object": "STUDENTREPORT"
+      "object": "STUDENTREPORT",
+      "revalidate": true
     }
   }
 }

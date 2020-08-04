@@ -12,5 +12,5 @@ BEGIN
    
    
    -- insufficient previlege error for insert from a procedure
-   INSERT INTO "STUDENTREPORT1" VALUES(171, 'Samesh', 'allahabad', 8777890989);
+   --INSERT INTO "STUDENTREPORT1" VALUES(171, 'Samesh', 'allahabad', 8777890989);
 END

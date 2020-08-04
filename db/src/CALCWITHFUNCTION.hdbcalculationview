@@ -2,10 +2,41 @@
 <Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="CALCWITHFUNCTION" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
 <descriptions defaultDescription="CALCWITHFUNCTION"/>
 <localVariables>
-  <variable id="IP_1" parameter="true">
-    <descriptions defaultDescription=""/>
-    <variableProperties datatype="INTEGER" mandatory="false" defaultValue="1">
-      <valueDomain type="empty"/>
+  <variable id="Rank" parameter="true">
+    <descriptions defaultDescription="Enter the rank to see the info of student."/>
+    <variableProperties datatype="INTEGER" mandatory="true" defaultValue="1">
+      <valueDomain type="StaticList">
+        <listEntry id="1">
+          <descriptions defaultDescription="1"/>
+        </listEntry>
+        <listEntry id="2">
+          <descriptions defaultDescription="2"/>
+        </listEntry>
+        <listEntry id="3">
+          <descriptions defaultDescription="3"/>
+        </listEntry>
+        <listEntry id="4">
+          <descriptions defaultDescription="4"/>
+        </listEntry>
+        <listEntry id="5">
+          <descriptions defaultDescription="5"/>
+        </listEntry>
+        <listEntry id="6">
+          <descriptions defaultDescription="6"/>
+        </listEntry>
+        <listEntry id="7">
+          <descriptions defaultDescription="7"/>
+        </listEntry>
+        <listEntry id="8">
+          <descriptions defaultDescription="8"/>
+        </listEntry>
+        <listEntry id="9">
+          <descriptions defaultDescription="9"/>
+        </listEntry>
+        <listEntry id="10">
+          <descriptions defaultDescription="10"/>
+        </listEntry>
+      </valueDomain>
       <selection multiLine="false" type="SingleValue"/>
     </variableProperties>
   </variable>
@@ -18,24 +49,24 @@
     <calculatedViewAttributes/>
     <variableMapping xsi:type="Variable:VariableMapping">
       <targetVariable name="SID"/>
-      <localVariable>IP_1</localVariable>
+      <localVariable>Rank</localVariable>
     </variableMapping>
   </calculationView>
 </calculationViews>
 <logicalModel id="TableFunction_1">
   <attributes>
-    <attribute id="CITY" order="2" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="CITY"/>
-      <keyMapping columnObjectName="TableFunction_1" columnName="CITY"/>
-    </attribute>
-    <attribute id="SNAME" order="3" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SNAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SNAME"/>
       <keyMapping columnObjectName="TableFunction_1" columnName="SNAME"/>
     </attribute>
-  </attributes>
+  
+    <attribute id="CITY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="CITY"/>
+    </attribute></attributes>
   <calculatedAttributes/>
   <baseMeasures>
-    <measure id="TOTALMARKS" order="1" aggregationType="sum" measureType="simple">
+    <measure id="TOTALMARKS" order="3" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="TOTALMARKS"/>
       <measureMapping columnObjectName="TableFunction_1" columnName="TOTALMARKS"/>
     </measure>
